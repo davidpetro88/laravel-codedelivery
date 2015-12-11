@@ -1,0 +1,60 @@
+laravel new laravel-codedelivery
+
+Alterar o namespace do projeto -> php artisan app:name CodeDelivery
+
+->
+
+Criando migração
+php artisan make:migration create_categories_table --create=categories
+php artisan make:migration create_products_table --create=products
+php artisan make:migration create_clients_table --create=clients
+php artisan make:migration create_orders_table --create=orders
+php artisan make:migration create_order_items_table --create=order_items
+
+Cria tabela no banco ou atualiza
+php artisan migrate
+
+Criando modulo
+php artisan make:model Category
+
+Fillable = permite passar por construtor
+
+
+Criando Seed
+php artisan make:seed UserTableSeeder
+php artisan make:seed CategoryTableSeeder
+php artisan make:seed ProductTableSeeder
+
+Inserindo os Seed (Insere dados banco)
+php artisan db:seed
+
+Tinker para acessar o banco via console
+php artisan tinker
+>>>> CodeDelivery\Models\Category::all();
+>>>> CodeDelivery\Models\User::all();
+>>>> $p = CodeDelivery\Models\Product::find(60);
+$p->category;
+
+
+Roda todas migrations depois o seed
+php artisan migrate:refresh --seed
+
+
+Sobrescreve
+php artisan make:repository Category -f
+
+Criando provider
+php artisan make:provider RepositoryServiceProvider
+
+
+Craindo controller o plain é para vir em branco
+php artisan make:controller CategoriesController --plain
+
+
+
+
+
+
+Links usados
+https://github.com/andersao/l5-repository
+https://github.com/bestmomo/scafold   -> "minimum-stability":"dev",
