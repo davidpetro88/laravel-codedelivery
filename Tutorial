@@ -53,7 +53,8 @@ php artisan make:controller CategoriesController --plain
 
 
 
-
+Para imprimir um html
+{!! $categories->render() !!}
 
 Links usados
 https://github.com/andersao/l5-repository
