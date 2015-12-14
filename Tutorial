@@ -51,6 +51,8 @@ Craindo controller o plain é para vir em branco
 php artisan make:controller CategoriesController --plain
 
 
+Criando Request
+php artisan make:request AdminCategoryRequest
 
 
 Para imprimir um html
