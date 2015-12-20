@@ -14,6 +14,7 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
 
+
         $this->app->bind(
           'CodeDelivery\Repositories\CategoryRepository',
             'CodeDelivery\Repositories\CategoryRepositoryEloquent'
@@ -23,6 +24,23 @@ class RepositoryServiceProvider extends ServiceProvider
             'CodeDelivery\Repositories\ProductRepository',
             'CodeDelivery\Repositories\ProductRepositoryEloquent'
         );
-        //
+
+        $this->app->bind(
+            'CodeDelivery\Repositories\UserRepository',
+            'CodeDelivery\Repositories\UserRepositoryEloquent'
+        );
+
+        $this->app->bind(
+            'CodeDelivery\Repositories\ClientRepository',
+            'CodeDelivery\Repositories\ClientRepositoryEloquent'
+        );
+
+        $this->app->bind(
+            'CodeDelivery\Repositories\OrderRepository',
+            'CodeDelivery\Repositories\OrderRepositoryEloquent'
+        );
+
+
+
     }
 }

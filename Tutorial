@@ -61,3 +61,5 @@ Para imprimir um html
 Links usados
 https://github.com/andersao/l5-repository
 https://github.com/bestmomo/scafold   -> "minimum-stability":"dev",
+
+Comando composer dump-autoload

@@ -17,7 +17,7 @@ class OrderItem extends Model implements Transformable
         'qtd'
     ];
 
-    public function products(){
+    public function product(){
         return $this->belongsTo(Product::class);
     }
 
