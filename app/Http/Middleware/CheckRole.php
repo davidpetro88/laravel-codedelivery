@@ -14,11 +14,15 @@ class CheckRole
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $role)
     {
-        if(!Auth::check()) return redirect('/auth/login');
-        if(Auth::user()->role <> "admin") return redirect('/auth/login');
 
+        if(!Auth::check()) {
+            return redirect('/auth/login');
+        }
+        if(Auth::user()->role <> $role) {
+            return redirect('/auth/login');
+        }
         return $next($request);
     }
 }
