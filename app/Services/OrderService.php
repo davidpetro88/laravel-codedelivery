@@ -70,10 +70,10 @@ class OrderService
             throw $e;
         }
     }
-    public function updateStatus($id, $idDeliveryman, $status)
-    {
-        $order = $this->orderRepository->getByIdAndDeliveryman($id, $idDeliveryman);
-        if($order instanceof Order) {
+
+    public function updateStatus($id, $deliveryman_id, $status){
+        $order = $this->orderRepository->getByIdAndDeliveryman($id, $deliveryman_id);
+        if($order instanceof Order){
             $order->status = $status;
             $order->save();
             return $order;
