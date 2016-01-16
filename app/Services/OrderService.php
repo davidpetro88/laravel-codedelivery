@@ -38,10 +38,11 @@ class OrderService
     public function create(array $data)
     {
         DB::beginTransaction();
-        try{
+        try {
             $data['status'] = 0;
-            if(isset($data['cupom_code']))
-            {
+            if (isset($data['cupom_id'])) unset($data['cupom_id']);
+
+            if (isset($data['cupom_code'])) {
                 $cupom = $this->cupomRepository->findByField('code', $data['cupom_code'])->first();
                 $data['cupom_id'] = $cupom->id;
                 $cupom->used = 1;
@@ -52,28 +53,27 @@ class OrderService
             unset($data['item']);
             $order = $this->orderRepository->create($data);
             $total = 0;
-            foreach($items as $item)
-            {
+            foreach ($items as $item) {
                 $item['price'] = $this->productRepository->find($item['product_id'])->price;
                 $order->items()->create($item);
                 $total += $item['price'] * $item['qtd'];
             }
             $order->total = $total;
-            if(isset($cupom)){
-                $order->total = $total - $cupom->value;
-            }
+            if (isset($cupom)) $order->total = $total - $cupom->value;
+
             $order->save();
             DB::commit();
             return $order;
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
             throw $e;
         }
     }
 
-    public function updateStatus($id, $deliveryman_id, $status){
+    public function updateStatus($id, $deliveryman_id, $status)
+    {
         $order = $this->orderRepository->getByIdAndDeliveryman($id, $deliveryman_id);
-        if($order instanceof Order){
+        if ($order instanceof Order) {
             $order->status = $status;
             $order->save();
             return $order;

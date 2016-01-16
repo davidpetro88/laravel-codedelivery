@@ -30,4 +30,5 @@ class OrderItemRepositoryEloquent extends BaseRepository implements OrderItemRep
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
 }

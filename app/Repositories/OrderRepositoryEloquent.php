@@ -14,6 +14,7 @@ use CodeDelivery\Models\Order;
  */
 class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
 {
+    protected $skipPresenter = true;
 
     public function getByIdAndDeliveryman($id, $idDeliveryman)
     {
@@ -26,10 +27,9 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
                     'data' => $result['data'][0]
                 ];
             }else{
-                throw new ModelNotFoundException('Model não existe');
+                throw new ModelNotFoundException('Order não existe');
             }
         }
-
         return $result;
     }
 
@@ -49,5 +49,10 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function presenter()
+    {
+        return \CodeDelivery\Presenters\OrderPresenter::class;
     }
 }

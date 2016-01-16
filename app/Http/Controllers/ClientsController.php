@@ -39,9 +39,7 @@ class ClientsController extends Controller
 
     public function store(AdminClientRequest $request)
     {
-        //dd($request->all()); //dump
         $data = $request->all();
-        //$this->repository->create($data);
         $this->clientService->create($data);
         return redirect()->route('admin.clients.index');
     }
@@ -55,9 +53,7 @@ class ClientsController extends Controller
     public function update (AdminClientRequest $request, $id)
     {
         $data = $request->all();
-        //$this->repository->update($data, $id);
         $this->clientService->update($data,$id);
-
         return redirect()->route('admin.clients.index');
     }
 }
