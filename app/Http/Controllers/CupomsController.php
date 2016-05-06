@@ -2,15 +2,15 @@
 
 namespace CodeDelivery\Http\Controllers;
 
-use CodeDelivery\Repositories\CupomRepository;
-use CodeDelivery\Http\Requests;
 use CodeDelivery\Http\Requests\AdminCupomRequest;
+use CodeDelivery\Repositories\CategoryRepository;
+use CodeDelivery\Repositories\CupomRepository;
 
 
 class CupomsController extends Controller
 {
     /**
-     * @var CupomRepository
+     * @var CategoryRepository
      */
     private $repository;
 
@@ -21,10 +21,15 @@ class CupomsController extends Controller
 
     public function index()
     {
-        $cupoms = $this->repository->paginate(5);
-        return view('admin.cupoms.index', compact('cupoms'));
+        $cupons = $this->repository->paginate();
+        return view('admin.cupoms.index', compact('cupons'));
     }
 
+    /**
+     * Metodo GET para mostrar formulario na tela
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         return view('admin.cupoms.create');
@@ -32,7 +37,6 @@ class CupomsController extends Controller
 
     public function store(AdminCupomRequest $request)
     {
-        //dd($request->all()); //dump
         $data = $request->all();
         $this->repository->create($data);
         return redirect()->route('admin.cupoms.index');
@@ -40,14 +44,14 @@ class CupomsController extends Controller
 
     public function edit($id)
     {
-        $category = $this->repository->find($id);
-        return view('admin.categories.edit', compact('category'));
+        $cupom = $this->repository->find($id);
+        return view('admin.cupoms.edit', compact('cupom'));
     }
 
-    public function update (AdminCategoryRequest $request, $id)
+    public function update(AdminCupomRequest $request, $id)
     {
         $data = $request->all();
         $this->repository->update($data, $id);
-        return redirect()->route('admin.categories.index');
+        return redirect()->route('admin.cupoms.index');
     }
 }

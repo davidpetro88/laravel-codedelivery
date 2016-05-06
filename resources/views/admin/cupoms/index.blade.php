@@ -1,38 +1,30 @@
 @extends('app')
 
 @section('content')
+
     <div class="container">
-        <h3> Cupons </h3>
-        <br>
-        <a href="{{ route('admin.cupoms.create') }}" class="btn btn-default" > Novo Cupom</a>
-        <br><br>
-        <table class="table table-bordered">
+        <h3>Cupons</h3>
+
+        <a href="{{route('admin.cupoms.create')}}" class="btn btn-default">Novo Cupom</a>
+
+
+        <table class="table">
             <thead>
-            <tr>
-                <th>ID</th>
-                <th>Código</th>
-                <th>Valor</th>
-                <th>Ação</th>
-            </tr>
+            <th>ID</th>
+            <th>Codigo</th>
+            <th>Valor</th>
             </thead>
-            @foreach($cupoms as $cupom)
             <tbody>
-            <tr>
-                <td>{{ $cupom->id }}</td>
-                <td>{{ $cupom->code }}</td>
-                <td>{{ $cupom->value }}</td>
-                <td>
-                    <a href="#" class="btn btn-default btn-sm">
-                        Editar
-                    </a>
-                </td>
-            </tr>
+            @foreach($cupons as $cupom)
+                <tr>
+                    <td>{{$cupom->id}}</td>
+                    <td>{{$cupom->code}}</td>
+                    <td>R$ {{$cupom->value}}</td>
+                </tr>
             @endforeach
             </tbody>
-
         </table>
-
-    {!! $cupoms->render() !!}
+        {!! $cupons->render() !!}
 
     </div>
 
