@@ -34,7 +34,8 @@ angular.module('starter', [
     ])
 
     .constant('appConfig', {
-        baseUrl: 'http://localhost:8000'
+        baseUrl: 'http://localhost:8000',
+        pusherKey:'74b900c75f62341fe62e'
     })
 
 //    .constant('appConfig',{
@@ -84,7 +85,8 @@ angular.module('starter', [
         });
     })*/
 
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform,$window,appConfig) {
+        $window.client = new Pusher(appConfig.pusherKey);
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -214,6 +216,9 @@ angular.module('starter', [
          * por padrao a biblioteca trabalha com cookies. e isso nao tem mais suporte
          * no cordova, por isso precisa ser sobreescrito o objeto para dar suporte
          * em localStorage
+         *
+         *  enumerble = Deixa o método visivel
+         *  configurable = Consegue mudar o objeto
          */
 
         $provide.decorator('OAuthToken',['$localStorage','$delegate',function($localStorage,$delegate){

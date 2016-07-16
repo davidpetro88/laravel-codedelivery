@@ -1,4 +1,5 @@
 angular.module('starter.controllers')
+
     .controller('ClientViewDeliveryCtrl',[
         '$scope',
         '$stateParams',
@@ -24,9 +25,7 @@ angular.module('starter.controllers')
             var iconUrl = 'http://maps.google.com/mapfiles/kml/pal2/';
 
             $scope.order = [];
-
             $scope.markers = [];
-
             $scope.map = $map;
 
             $ionicLoading.show({
@@ -67,7 +66,7 @@ angular.module('starter.controllers')
                     client.city + ' - '+
                     client.state;
 
-                address='89600000, Sebastião Poletto,18, Joaçaba - Santa Catarina';
+                address='91240090, Jardim Leopoldina,955, Porto Alegre - Rio Grande do Sul';
 
                 createMarkerClient(address);
                 watchPositionDeliveryman(order.hash);
@@ -143,14 +142,12 @@ angular.module('starter.controllers')
                 });
             }
 
-
             function createBounds(){
                 var bounds = new google.maps.LatLngBounds();
                 var latlng;
 
                 angular.forEach($scope.markers,function(value){
                     latlng = new google.maps.LatLng(Number(value.coords.latitude),Number(value.coords.longitude));
-
                     bounds.extend(latlng);
                 });
 
@@ -169,7 +166,6 @@ angular.module('starter.controllers')
         }])
     .controller('CvdControlDescentralize',['$scope','$map',function($scope,$map){
         $scope.map = $map;
-
         $scope.fit = function(){
             $scope.map.fit = !$scope.map.fit;
         };

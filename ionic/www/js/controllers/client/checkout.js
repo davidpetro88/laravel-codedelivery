@@ -13,7 +13,6 @@ angular.module('starter.controllers')
             var cart = $cart.get();
 
             $scope.cupom = cart.cupom;
-
             $scope.items = cart.items;
             $scope.total = $cart.getTotalFinal();
 
@@ -35,7 +34,6 @@ angular.module('starter.controllers')
 
                 console.log('tentou DAvid');
                 var o = { items: angular.copy($scope.items) };
-
 
                 angular.forEach(o.items,function(item){
                     item.product_id = item.id;
@@ -64,29 +62,24 @@ angular.module('starter.controllers')
                 });
             };
 
-/*
+
             $scope.readBarCode = function(){
 
                 $cordovaBarcodeScanner
                     .scan()
                     .then(function(barcodeData) {
-
                         getValueCupom(barcodeData.text);
-
                     }, function(error) {
                         $ionicPopup.alert({
                             title : 'Alerta',
                             template: 'Não foi possível ler o código de barras.'
                         });
                     });
-
             };
-*/
+
             $scope.removeCupom = function(){
                 $cart.removeCupom();
-
                 $scope.cupom = $cart.get().cupom;
-
                 $scope.total = $cart.getTotalFinal();
             };
 

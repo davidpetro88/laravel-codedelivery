@@ -15,10 +15,10 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
     protected $skipPresenter = true;
 
     public function getByIdAndDeliveryman($id,$idDeliveryman){
-        $result = $this->model
-            ->where('id',$id)
-            ->where('user_deliveryman_id',$idDeliveryman)
-            ->first();
+
+        $result = $this->model->where('id',$id)
+                              ->where('user_deliveryman_id',$idDeliveryman)
+                              ->first();
         if ($result){
             return $this->parserResult($result);
         }

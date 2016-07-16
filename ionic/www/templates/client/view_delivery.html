@@ -33,7 +33,6 @@
             <!--ng-repeat = "o in markers">-->
             <!--</ui-gmap-marker>-->
             <ui-gmap-markers models="markers" coords="'coords'" options="'options'" fit="map.fit">
-
             </ui-gmap-markers>
 
 
@@ -42,12 +41,13 @@
                     position="top-right"
                     controller="CvdControlDescentralize"
                     index="-1">
+            </ui-gmap-map-control>
+
                 <ui-gmap-map-control
                         template="button-reload.html"
                         position="top-right"
                         controller="CvdControlReaload"
                         index="-1">
-
                 </ui-gmap-map-control>
 
         </ui-gmap-google-map>

@@ -47,5 +47,4 @@ class Order extends Model implements Transformable
     {
         return $this->hasMany(Product::class);
     }
-
 }

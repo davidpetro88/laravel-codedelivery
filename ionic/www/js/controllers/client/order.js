@@ -73,7 +73,7 @@ angular.module('starter.controllers')
 
 
 
-            $scope.loadMore = function(){
+            $scope.loadMore = function(){       
                 getOrders().then(function(data){
                     $scope.items = $scope.items.concat(data.data);
 

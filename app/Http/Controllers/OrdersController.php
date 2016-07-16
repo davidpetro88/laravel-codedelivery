@@ -9,41 +9,44 @@
 namespace CodeDelivery\Http\Controllers;
 
 
+use CodeDelivery\Http\Requests\AdminOrderRequest;
+use CodeDelivery\Http\Requests\Request;
 use CodeDelivery\Repositories\OrderRepository;
 use CodeDelivery\Repositories\UserRepository;
-use Illuminate\Http\Request;
+use CodeDelivery\Services\OrderService;
 
 class OrdersController extends Controller
 {
     /**
-     * @var Repository
+     * @var OrderRepository
      */
-    private $repository;
-
-    public function __construct(OrderRepository $repository)
+    private $orderRepository;
+    /**
+     * @var OrderService
+     */
+    private $orderService;
+    public function __construct(OrderRepository $orderRepository,OrderService $orderService)
     {
-        $this->repository = $repository;
+        $this->orderRepository = $orderRepository;
+        $this->orderService = $orderService;
     }
-
-    public function index()
-    {
-        $orders = $this->repository->paginate();
-        return view('admin.orders.index', compact('orders'));
+    public function index(){
+        $orders = $this->orderRepository->paginate();
+        return view('admin.orders.index',compact('orders'));
     }
-
-    public function edit($id, UserRepository $userRepository)
-    {
-        $list_status = [0 => 'Pendente', 1=>'A Caminho', 2=> 'Entregue', 3=> 'Cancelado'];
-        $order = $this->repository->find($id);
-        $deliveryman = $userRepository->getDeliveryman();
-        return view('admin.orders.edit', compact('order','list_status','deliveryman'));
+    public function edit($id,UserRepository $userRepository){
+        $listStatus = [
+            0=>'Pendente',
+            1=>'A Caminho',
+            2=>'Entregue'
+        ];
+        $order = $this->orderRepository->find($id);
+        $deliveryMan = $userRepository->getDeliverymen();
+        return view('admin.orders.edit',compact('order','listStatus','deliveryMan'));
     }
-
-    public function update(Request $request, $id)
-    {
-        $all = $request->all();
-        $this->repository->update($all, $id);
+    public function update(AdminOrderRequest $request,$id){
+        $data = $request->all();
+        $this->orderService->update($data,$id);
         return redirect()->route('admin.orders.index');
-
     }
 }

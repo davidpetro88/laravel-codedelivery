@@ -13,6 +13,7 @@ use Illuminate\Contracts\Support\Jsonable;
 
 
 class Geo implements Jsonable{
+        
     public $lat;
     public $long;
     /**

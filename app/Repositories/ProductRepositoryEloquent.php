@@ -17,7 +17,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     protected $skipPresenter=true;
 
 
-    public function lists()
+        public function listsProduct()
     {
         return $this->model->get(['id', 'name', 'price']);
     }

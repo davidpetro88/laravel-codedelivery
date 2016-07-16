@@ -34,9 +34,7 @@ class UserTransformer extends TransformerAbstract
      * @return \League\Fractal\Resource\Item
      */
     public function includeClient(User $model){
-        if ($model->client) {
-            return $this->item($model->client, new ClientTransformer());
-        }
+        if ($model->client) return $this->item($model->client, new ClientTransformer());
         return null;
     }
 }
