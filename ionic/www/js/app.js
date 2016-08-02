@@ -19,7 +19,7 @@ angular.module('starter.run',[]);
 
 angular.module('starter', [
         'ionic',
-      //  'ionic.service.core',
+        'ionic.service.core',
         'starter.controllers',
         'starter.services',
         'starter.filters',
@@ -31,11 +31,16 @@ angular.module('starter', [
         'pusher-angular',
         'permission',
         'http-auth-interceptor'
+
     ])
 
     .constant('appConfig', {
         baseUrl: 'http://localhost:8000',
-        pusherKey:'74b900c75f62341fe62e'
+        pusherKey:'74b900c75f62341fe62e',
+        redirectAfterLogin : {
+           client : 'client.order',
+           deliveryman : 'deliveryman.order'
+        }
     })
 
 //    .constant('appConfig',{
@@ -96,6 +101,23 @@ angular.module('starter', [
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
+
+            Ionic.io();
+
+            var push  = new Ionic.Push({
+                debug : true,
+                onNotification: function(message){
+                    
+                    console.log(message);
+                    alert(message.text);
+                }
+            });
+
+            push.register(function(token){
+                console.log(token.token);
+                $localStorage.set('device_token',token.token);
+            });
+
         });
     })
 
@@ -144,6 +166,11 @@ angular.module('starter', [
                         only : ['client-role']
                     }
                 }
+            })
+            .state('client.touchid',{
+                url: '/touchid',
+                templateUrl : 'templates/touchid.html',
+                controller: 'TouchIDCtrl'
             })
             .state('client.order',{
                 url: '/order',
@@ -194,6 +221,11 @@ angular.module('starter', [
                         only : ['deliveryman-role']
                     }
                 }
+            })
+            .state('deliveryman.touchid',{
+                url: '/touchid',
+                templateUrl : 'templates/touchid.html',
+                controller: 'TouchIDCtrl'
             })
             .state('deliveryman.order',{
                 url: '/order',

@@ -26,15 +26,14 @@ class ClientCheckoutController extends Controller
      * @var OrderService
      */
     private $orderService;
-    public function __construct(
-        OrderRepository $orderRepository,
-        UserRepository $userRepository,
-        OrderService $orderService
-    ) {
+
+    public function __construct( OrderRepository $orderRepository, UserRepository $userRepository,
+                                 OrderService $orderService) {
         $this->orderRepository = $orderRepository;
         $this->userRepository = $userRepository;
         $this->orderService = $orderService;
     }
+
     public function index(){
         $id = Authorizer::getResourceOwnerId();
         $clientId = $this->userRepository->find($id)->client->id;
@@ -45,6 +44,7 @@ class ClientCheckoutController extends Controller
             })->paginate();
         return $orders;
     }
+    
     public function show($id){
         $idClient = Authorizer::getResourceOwnerId();
         $order =  $this->orderRepository
