@@ -6,7 +6,8 @@ angular.module('starter.controllers')
         'UserData',
         '$cordovaTouchID',
         function($scope,$state,$ionicLoading,UserData,$cordovaTouchID){
-            $scope.isSupportTouchID = false;
+            // mudei true para testar
+            $scope.isSupportTouchID = true;
             $scope.user = UserData.get();
             $scope.logout = function(){
                 $state.go('logout');

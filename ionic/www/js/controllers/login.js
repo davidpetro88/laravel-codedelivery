@@ -12,8 +12,8 @@ angular.module('starter.controllers')
             $scope.loginWithTouchID = function () {
                 if($scope.isSupportTouchID){
                     $cordovaTouchID.authenticate("Passe o dedo para autenticar").then(function() {
-                    var promisse = $cordovaKeychain.getForKey('username', 'codedelivery'), username = null;
-                        promisse
+                    var promise = $cordovaKeychain.getForKey('username', 'codedelivery'), username = null;
+                        promise
                             .then(function (value) {
                                 username = value;
                                 return $cordovaKeychain.getForKey('password', 'codedelivery');
@@ -35,6 +35,4 @@ angular.module('starter.controllers')
                     $scope.isSupportTouchID = true;
                 });
             }
-
-
         }]);
